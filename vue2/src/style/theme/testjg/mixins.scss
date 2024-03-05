@@ -1,0 +1,39 @@
+@import "function";
+
+@mixin b($block) {
+    $B: $namespace+'-' +$block !global;
+
+    .#{$B} {
+        @content;
+    }
+}
+
+@mixin e($element) {
+    $E: $element !global;
+    $selector: &;
+    $currentSelector: "";
+
+    @each $unit in $element {
+        $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+    }
+
+    @if hitAllSpecialNestRule($selector) { // 判断当前层级结构，如果不是根节点 @at-root 时放到 $selector 层级下面
+        @at-root {
+            #{$selector} {
+                #{$currentSelector} {
+                    // transform: '#{$selector} - #{selectorToString($selector)}'; //transform 值为 :root[theme=light] .yf-form,
+                    // margin: 20px; // 调试
+                    @content;
+                }
+            }
+        }
+    }
+
+    @else {
+        @at-root {
+            #{$currentSelector} {
+                @content;
+            }
+        }
+    }
+}

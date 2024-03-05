@@ -1,0 +1,17 @@
+@import "mixins.scss";
+
+@include b(form) {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    background-color: aqua;
+
+    // .yf-form
+    @include e(content) {
+        // .yf-form__content
+        line-height: 40px;
+        position: relative;
+        font-size: 14px;
+        background-color: green;
+        color: yellow;
+    }
+}

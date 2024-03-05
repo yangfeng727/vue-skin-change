@@ -1,5 +1,15 @@
 <template>
   <div class="mian-content">
+
+    <!-- element-ui scss换肤失败，模拟 -->
+    <div style="margin: 30px 0;">
+      <p>模拟 element-ui层级 测试</p>
+      <div class="yf-form">
+        <div class="yf-form__content">yf-form__content 结构</div>
+      </div>
+    </div>
+
+
     <h2>element ui 官网demo - 换肤：<a href="https://element.eleme.cn/#/zh-CN/component/custom-theme"
         target="_blank">element-ui 官网主题换肤方案地址</a></h2>
     <div class="recommend">

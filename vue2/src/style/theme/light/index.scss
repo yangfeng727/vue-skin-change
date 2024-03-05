@@ -1,8 +1,8 @@
-:root[theme='light']{
-    @import "./element-vars.scss";
-    @import "~element-ui/packages/theme-chalk/src/index";
-    // 关于“~”的用法：URL中“~”后的内容会作为一个模块请求被解析，可以参考VUE-CLI的文档 https://cli.vuejs.org/zh/guide/html-and-static-assets.html#url-%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99。
-}
+// :root[theme='light']{
+//     @import "./element-vars.scss";
+//     @import "~element-ui/packages/theme-chalk/src/index";
+//     // 关于“~”的用法：URL中“~”后的内容会作为一个模块请求被解析，可以参考VUE-CLI的文档 https://cli.vuejs.org/zh/guide/html-and-static-assets.html#url-%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99。
+// }
 :root[theme='light'] {
     --theme: #ffffff;
     --fontColor: #000000;

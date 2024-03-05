@@ -1,11 +1,35 @@
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-// @import "./theme/dark/element-vars.scss";
-// @import "~element-ui/packages/theme-chalk/src/index";
+// 验证下方式：element-ui scss 变量方式 demo
 
-@import './theme/dark/index.scss';
+@import "./theme/dark/element-vars.scss";
+@import "~element-ui/packages/theme-chalk/src/index";
+
+
+
+// scss 变量方式换肤element-ui 所有类前添加肤色类 --- 有问题，内部使用@at-root导致嵌套异常
+// :root[theme='dark']{
+//     @import "./theme/dark/element-vars.scss";
+//     @import "~element-ui/packages/theme-chalk/src/index";
+//     // 关于“~”的用法：URL中“~”后的内容会作为一个模块请求被解析，可以参考VUE-CLI的文档 https://cli.vuejs.org/zh/guide/html-and-static-assets.html#url-%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99。
+// }
+// :root[theme='light']{
+//     @import "./theme/light/element-vars.scss";
+//     @import "~element-ui/packages/theme-chalk/src/index";
+//     // 关于“~”的用法：URL中“~”后的内容会作为一个模块请求被解析，可以参考VUE-CLI的文档 https://cli.vuejs.org/zh/guide/html-and-static-assets.html#url-%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99。
+// }
+
+// 层级测试 --- element ui 里面有根据层级判断，有的本来是根节点的样式，在外面套了一层样式后将导致层级变化，改为 #{$selector} 层级下，因此样式异常是正常的。
+// 但是这边项目是怎么解决这个问题的？？？ -- todo
+:root[theme='light']{
+    @import "./theme/testjg/index.scss";
+}
+
+
 @import './theme/light/index.scss';
+@import './theme/dark/index.scss';
+
 
 // 公共样式...
 * {
