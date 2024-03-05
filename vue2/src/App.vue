@@ -15,7 +15,7 @@ import BHeader from './components/BHeader.vue'
 import BAside from './components/BAside.vue'
 import BMain from './components/BMain.vue'
 
-import { setTheme } from '@/utils/theme'
+import { getTheme, setTheme } from '@/utils/theme'
 
 export default {
   name: 'App',
@@ -25,7 +25,7 @@ export default {
     BMain
   },
   mounted() {
-    setTheme()
+    setTheme(getTheme())
   }
 }
 </script>
