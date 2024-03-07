@@ -1,14 +1,14 @@
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-// 验证下方式：element-ui scss 变量方式 demo
+// 验证下方式：element-ui scss 变量方式 官网demo -- 成功更换
+// .theme-light{
+// @import "./theme/dark/element-vars.scss";
+// @import "~element-ui/packages/theme-chalk/src/index";
+// }
 
-@import "./theme/dark/element-vars.scss";
-@import "~element-ui/packages/theme-chalk/src/index";
-
-
-
-// scss 变量方式换肤element-ui 所有类前添加肤色类 --- 有问题，内部使用@at-root导致嵌套异常
+// 方式一：:root[theme='dark'] 这种有问题 ---- 问题原因：functions.scss 文件中会判断是否带有":"，导致hitAllSpecialNestRule方法判断为true，让样式只在当前父级别下，正常应该是全局通用样式才对。改成类名方式就行了 str-index($selector, ':') 
+// scss 变量方式换肤element-ui 所有类前添加肤色类 --- 有问题，内部使用@at-root导致嵌套异常 
 // :root[theme='dark']{
 //     @import "./theme/dark/element-vars.scss";
 //     @import "~element-ui/packages/theme-chalk/src/index";
@@ -20,13 +20,25 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 //     // 关于“~”的用法：URL中“~”后的内容会作为一个模块请求被解析，可以参考VUE-CLI的文档 https://cli.vuejs.org/zh/guide/html-and-static-assets.html#url-%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99。
 // }
 
+// 方式二： 改成.theme-light 类名称方式 ---- 这样能修复方式一导致的 element ui样式出不来的问题，但存在样式覆盖问题。.theme-light 的全局样式会被 .theme-dark 覆盖，导致部分样式换肤失败。
+.theme-light {
+    @import "./theme/light/element-vars.scss";
+    @import "~element-ui/packages/theme-chalk/src/index";
+}
+.theme-dark {
+    @import "./theme/dark/element-vars.scss";
+    @import "~element-ui/packages/theme-chalk/src/index";
+}
+
 // 层级测试 --- element ui 里面有根据层级判断，有的本来是根节点的样式，在外面套了一层样式后将导致层级变化，改为 #{$selector} 层级下，因此样式异常是正常的。
-// 但是这边项目是怎么解决这个问题的？？？ -- todo
-:root[theme='light']{
+// 但是这边项目是怎么解决这个问题的 ---后发现又同样的问题，那没事了。。。
+.theme-light{
     @import "./theme/testjg/index.scss";
 }
 
-
+:root{
+    --fontSize: 18px;
+}
 @import './theme/light/index.scss';
 @import './theme/dark/index.scss';
 
@@ -35,4 +47,8 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 * {
     margin: 0;
     padding: 0;
+}
+
+body{
+    font-size: 12px;
 }

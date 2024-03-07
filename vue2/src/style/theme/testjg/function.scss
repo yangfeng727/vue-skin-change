@@ -2,6 +2,7 @@
 
 /* BEM support Func
  -------------------------- */
+// 比如 selectorToString(yf-form) => 输出字符串 'yf-form'
 @function selectorToString($selector) {
   $selector: inspect($selector);
   $selector: str-slice($selector, 2, -2);

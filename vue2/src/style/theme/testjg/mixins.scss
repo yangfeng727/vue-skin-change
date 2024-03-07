@@ -8,20 +8,45 @@
     }
 }
 
+// & 用法 - 判断父选择器是否存在
+@mixin does-parent-exist {
+    @if & {
+        &:hover {
+            color: red;
+        }
+    }
+
+    @else {
+        a {
+            color: red;
+        }
+    }
+}
+// sass语法参考： https://blog.csdn.net/weixin_44739820/article/details/130221249?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-9-130221249-blog-100173522.235^v43^pc_blog_bottom_relevance_base2&spm=1001.2101.3001.4242.6&utm_relevant_index=10
+
 @mixin e($element) {
     $E: $element !global;
-    $selector: &;
+    $selector: &; // &指的是当前的父选择器。这是一个逗号分隔的列表，由空格分隔的列表组成
+    
+    // & 使用 eg：-  $selector is now ((".foo.bar" ".baz.bang"), ".bip.qux").
+    // .foo.bar .baz.bang, .bip.qux {
+    //     $selector: &;
+    // }
+
     $currentSelector: "";
 
     @each $unit in $element {
         $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
     }
 
-    @if hitAllSpecialNestRule($selector) { // 判断当前层级结构，如果不是根节点 @at-root 时放到 $selector 层级下面
+    @if hitAllSpecialNestRule($selector) {
+
+        // 判断当前层级结构，如果不是根节点 @at-root 时放到 $selector 层级下面
         @at-root {
             #{$selector} {
                 #{$currentSelector} {
                     // transform: '#{$selector} - #{selectorToString($selector)}'; //transform 值为 :root[theme=light] .yf-form,
+                    transform: '1 #{inspect($selector)}'; //transform 值为 :root[theme=light] .yf-form,
                     // margin: 20px; // 调试
                     @content;
                 }
@@ -32,6 +57,7 @@
     @else {
         @at-root {
             #{$currentSelector} {
+                transform: '2 #{inspect($selector)}'; //transform 值为 :root[theme=light] .yf-form,
                 @content;
             }
         }

@@ -34,7 +34,7 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: var(--fontColor);
-  font-size: 18px;
+  font-size: var(--fontSize);
   position: absolute;
   left: 0;
   top: 0;

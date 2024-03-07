@@ -8,12 +8,12 @@ export function setTheme(val) {
     document.documentElement.setAttribute('theme', theme)
 
     // app 节点添加样式类
-    // let domApp = document.getElementById('app')
-    // if(!domApp) return
-    // themes.map(item=>{
-    //     domApp.classList.remove(`theme-${item}`);
-    // })
-    // domApp.classList.add(`theme-${theme}`)
+    let domApp = document.documentElement
+    if(!domApp) return
+    themes.map(item=>{
+        domApp.classList.remove(`theme-${item}`);
+    })
+    domApp.classList.add(`theme-${theme}`)
 }
 export function getTheme() {
     return localStorage.getItem(themeKey)
